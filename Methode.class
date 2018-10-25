@@ -1,0 +1,58 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Methode {
+
+	private static Scanner clavier = new Scanner(System.in);
+
+	static ArrayList<Integer> totalScoreJoueur = new ArrayList<>();
+
+	public static void main(String[] args) {
+
+		System.out.println("Calcul des scores d'une partie");
+
+		System.out.println("Saisie des données du premier joueur :");
+		controlScore();
+
+		System.out.println("Saisie des données du second joueur :");
+		controlScore();
+	}
+
+	/*Methode qui compare les scores des 2 joueurs */
+	static void compareScore(int scoreJoueur1, int scoreJoueur2){
+		
+		if(scoreJoueur1 > scoreJoueur2) {
+			System.out.println("Le premier joueur à gagné");
+			return;
+		}else if(scoreJoueur1 == scoreJoueur2) {
+			System.out.println("Les 2 joueurs sont à égalité");
+		}else
+			System.out.println("Le second joueur à gagné");
+	}
+	
+	/* Methode qui contrôle le score saisie par l'user */
+	static void controlScore() {
+		double score, temps;
+		//boucle qui enregistre le score
+		do {
+			System.out.println("Entrer le score (compris entre 0 et 100) :");
+			score = clavier.nextDouble();
+		} while (((score < 0) || (score > 100)));
+
+		//boucle qui enregistre le temps
+		do {
+			System.out.println("Entrer le temps (compris entre 0 et 60) :");
+			temps = clavier.nextDouble();
+		} while (((temps < 0) || (temps > 100)));
+
+		//ajout au tableau le total de chaque joueur
+		totalScoreJoueur.add((int) (1000 * score / temps));
+
+		//condition qui compare les 2 joueurs
+		if(totalScoreJoueur.size() > 1) {
+		compareScore(totalScoreJoueur.get(0), totalScoreJoueur.get(1));
+		}		
+	}
+}
